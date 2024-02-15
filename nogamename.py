@@ -49,9 +49,14 @@ def init(WIN_SIZE: tuple, TITLE: str, FONT_NAME: str, FONT_SIZE: int, NAME: str)
     USERNAME = NAME
     SCENES = [
         [
-         pygame.Rect(0, HEIGHT - 20, WIDTH, 20), pygame.Rect(20, HEIGHT - 60, 20, 20),
-         pygame.Rect(600, HEIGHT - 60, 60, 20), pygame.Rect(100, HEIGHT - 140, 60, 20),
-         pygame.Rect(680, HEIGHT - 120, 60, 20)
+            pygame.Rect(0, HEIGHT - 20, WIDTH, 20), pygame.Rect(20, HEIGHT - 60, 20, 20),
+            pygame.Rect(600, HEIGHT - 60, 60, 20), pygame.Rect(100, HEIGHT - 140, 60, 20),
+            pygame.Rect(680, HEIGHT - 120, 60, 20)
+        ],
+        [
+            pygame.Rect(0, HEIGHT - 20, WIDTH, 20), pygame.Rect(20, HEIGHT - 60, 20, 20),
+            pygame.Rect(600, HEIGHT - 60, 60, 20), pygame.Rect(100, HEIGHT - 140, 60, 20),
+            pygame.Rect(680, HEIGHT - 120, 60, 20)
         ]
     ]
     pygame.display.update()
@@ -62,7 +67,7 @@ def main():
     run = True
     color = "black"
     player = pygame.Rect(WIDTH / 2 - PLAYER_WIDTH, HEIGHT - PLAYER_HEIGHT - 20, PLAYER_WIDTH, PLAYER_HEIGHT)
-    scene = 0
+    scene = 1
     clock = pygame.time.Clock()
     isJumping = False
     falling = False
