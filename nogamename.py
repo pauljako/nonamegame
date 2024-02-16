@@ -145,6 +145,9 @@ def main():
 
 
 if __name__ == '__main__':
-    name = input("Player Name: ")
-    init((740, 600), f"NoGameName Player: {name}", "Times New Roman", 12, name)
-    main()
+    print("Warning: You are trying to launch the Game Directly. This is no longer supported. Starting launcher now.")
+    try:
+        import launcher
+    except ModuleNotFoundError:
+        print("Cannot Import Launcher: Module Not Found")
+    launcher.main()
