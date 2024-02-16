@@ -1,0 +1,11 @@
+{
+    "name": "nogamename",
+    "icon": "assets/textures/ground.png",
+    "command": {
+    	"install": "chmod +x launcher.py",
+        "run": "./launcher.py"
+    },
+    "version": "0.4",
+    "de_name": "NoGameName",
+    "startup_wm_class": "Tk"
+}
