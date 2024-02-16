@@ -63,7 +63,7 @@ def start_callback():
 
 def main():
     global entry, label, config
-    app = customtkinter.CTk()
+    app = customtkinter.CTk(className="NoGameName")
     app.title("NoGameName Launcher")
     app.geometry("350x250")
     app.columnconfigure(0, weight=1)
