@@ -23,10 +23,11 @@ FONT: pygame.font.Font
 USERNAME: str
 ASSETS: dict
 SCENES: list
+INIT_COLOR: str
 
 
-def init(WIN_SIZE: tuple, TITLE: str, FONT_NAME: str, FONT_SIZE: int, NAME: str):
-    global WIDTH, HEIGHT, WIN, PLAYER_WIDTH, PLAYER_HEIGHT, PLAYER_VEL, GAME_NAME, PLAYER_JUMP_TICKS, PLAYER_JUMP_PER_TICK, MAX_FPS, FONT, USERNAME, ASSETS, SCENES
+def init(WIN_SIZE: tuple, TITLE: str, FONT_NAME: str, FONT_SIZE: int, NAME: str, COLOR: str):
+    global WIDTH, HEIGHT, WIN, PLAYER_WIDTH, PLAYER_HEIGHT, PLAYER_VEL, GAME_NAME, PLAYER_JUMP_TICKS, PLAYER_JUMP_PER_TICK, MAX_FPS, FONT, USERNAME, ASSETS, SCENES, INIT_COLOR
     print(f"Welcome to {TITLE}!")
     print("Initializing Game...")
     pygame.quit()
@@ -51,6 +52,7 @@ def init(WIN_SIZE: tuple, TITLE: str, FONT_NAME: str, FONT_SIZE: int, NAME: str)
     PLAYER_JUMP_TICKS = 30
     PLAYER_WIDTH = 40
     PLAYER_HEIGHT = 80
+    INIT_COLOR = COLOR
     USERNAME = NAME
     SCENES = [
         [
@@ -71,7 +73,7 @@ def init(WIN_SIZE: tuple, TITLE: str, FONT_NAME: str, FONT_SIZE: int, NAME: str)
 
 def main():
     run = True
-    color = "black"
+    color = INIT_COLOR
     player = pygame.Rect(WIDTH / 2 - PLAYER_WIDTH, HEIGHT - PLAYER_HEIGHT - 20, PLAYER_WIDTH, PLAYER_HEIGHT)
     scene = 1
     clock = pygame.time.Clock()
