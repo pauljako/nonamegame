@@ -49,7 +49,8 @@ def start():
     else:
         config["name"] = entry.get()
         set_status("Initializing")
-        nogamename.init((740, 600), f"NoGameName (Player: {config['name']})", "Times New Roman", 12, config['name'])
+        print(config['color'])
+        nogamename.init((740, 600), f"NoGameName (Player: {config['name']})", "Times New Roman", 12, config['name'], config['color'])
         set_status("Running")
         nogamename.main()
         set_status("Ready")
