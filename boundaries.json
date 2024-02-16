@@ -6,6 +6,5 @@
         "run": "./launcher.py"
     },
     "version": "0.4",
-    "de_name": "NoGameName",
-    "startup_wm_class": "Tk"
+    "de_name": "NoGameName"
 }
