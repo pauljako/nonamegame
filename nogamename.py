@@ -1,8 +1,13 @@
 import os.path
-
-import pygame
-from network import Network
-from draw import draw
+try:
+    import pygame
+except ModuleNotFoundError:
+    print("It looks like pygame is not installed")
+try:
+    from network import Network
+    from draw import draw
+except ModuleNotFoundError:
+    print("Required Files not Found")
 
 WIDTH: int
 HEIGHT: int
@@ -61,6 +66,7 @@ def init(WIN_SIZE: tuple, TITLE: str, FONT_NAME: str, FONT_SIZE: int, NAME: str)
     ]
     pygame.display.update()
     print("Game Initialized")
+    return True
 
 
 def main():
