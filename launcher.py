@@ -12,13 +12,15 @@ config: dict
 
 
 def save_config(new_config: dict):
-    config_path = "config.json"
+    config_path = os.environ.get("VAR_DIR", ".")
+    config_path = config_path + "/config.json"
     with open(config_path, "w") as f:
         f.write(json.dumps(new_config))
 
 
 def load_config() -> dict:
-    config_path = "config.json"
+    config_path = os.environ.get("VAR_DIR", ".")
+    config_path = config_path + "/config.json"
     config: dict
     defaults = {
         "name": "",
@@ -63,6 +65,9 @@ def start_callback():
 
 def main():
     global entry, label, config
+
+    os.chdir(os.environ.get("APP_DIR", "./"))
+
     app = customtkinter.CTk(className="NoGameName")
     app.title("NoGameName Launcher")
     app.geometry("350x250")
@@ -78,7 +83,7 @@ def main():
     button = customtkinter.CTkButton(app, text="Start", command=start_callback)
     button.grid(row=1, column=0, padx=20, pady=20, sticky="ew")
     label = customtkinter.CTkLabel(status_frame, text="")
-    label.grid(row=1, column=0, padx=20, pady=20, sticky="ew")
+    label.grid(row=0, column=0, padx=20, pady=20, sticky="ew")
 
     set_status("Ready")
 
