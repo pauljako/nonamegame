@@ -1,9 +1,11 @@
 import pygame
+from server import values
 
 
 def draw(
         players: dict,
         ground,
+        dirt,
         scene: int,
         window: pygame.Surface,
         offline: bool,
@@ -15,16 +17,10 @@ def draw(
     window.fill("white")
     rects = {}
     colors = {}
-    if offline:
-        loading_txt = font.render("Offline", 1, "black")
-        window.blit(loading_txt, (0, 0))
-    GROUND_X_SIZE, GROUND_Y_SIZE = assets["ground"].get_size()
     for i in ground:
-        for d in range(int(i.size[0] / GROUND_X_SIZE)):
-            f = d * GROUND_X_SIZE
-            # window.blit(pygame.transform.scale(assets["ground"], (i.size[0] + f, i.size[1])), i)
-            window.blit(assets["ground"], (i.x + f + x_offset, i.y + y_offset))
-        # pygame.draw.rect(window, "green", i)
+        window.blit(pygame.transform.scale(assets["ground"], (i.width, i.height)), (i.x - x_offset, i.y - y_offset))
+    for i in dirt:
+        window.blit(pygame.transform.scale(assets["dirt"], (i.width, i.height)), (i.x - x_offset, i.y - y_offset))
     for n, p in players.items():
         if isinstance(p, pygame.Rect):
             rects[n] = p
@@ -32,7 +28,10 @@ def draw(
             na = n.split(".")[0]
             colors[na] = p
     for n, p in rects.items():
-        window.blit(pygame.Surface((p.width, p.height)), (p.x + x_offset, p.y + y_offset))
+        window.blit(pygame.transform.scale(assets["player"], (values.PLAYER_WIDTH, values.PLAYER_HEIGHT)), (p.x - x_offset, p.y - y_offset))
+    if offline:
+        loading_txt = font.render("Offline", 1, "black")
+        window.blit(loading_txt, (0, 0))
     pygame.display.update()
 
 

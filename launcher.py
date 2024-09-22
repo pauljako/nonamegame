@@ -6,7 +6,8 @@ import nogamename
 import customtkinter
 import threading
 
-entry: customtkinter.CTkEntry
+name_entry: customtkinter.CTkEntry
+room_entry: customtkinter.CTkEntry
 label: customtkinter.CTkLabel
 config: dict
 
@@ -24,7 +25,8 @@ def load_config() -> dict:
     config: dict
     defaults = {
         "name": "",
-        "color": "black"
+        "color": "black",
+        "room_code": ""
     }
     if not os.path.exists(config_path):
         config = defaults
@@ -45,26 +47,30 @@ def set_status(status: str):
 
 
 def start():
-    global entry, config
-    if entry.get() == "":
+    global name_entry, config, room_entry
+    if name_entry.get() == "":
         set_status("Please Enter Username")
+    elif room_entry.get() == "":
+        set_status("Please Enter Room Code")
     else:
-        config["name"] = entry.get()
+        config["name"] = name_entry.get()
+        config["room_code"] = room_entry.get()
         set_status("Initializing")
         print(config['color'])
-        nogamename.init((740, 600), f"NoGameName (Player: {config['name']})", "Times New Roman", 12, config['name'], config['color'])
+        nogamename.init((740, 600), f"NoGameName (Player: {config['name']})", "Times New Roman", 12, config['name'], config['color'], config['room_code'])
         set_status("Running")
         nogamename.main()
         set_status("Ready")
 
 
 def start_callback():
-    run_thread = threading.Thread(target=start)
-    run_thread.start()
+    start()
+    # run_thread = threading.Thread(target=start)
+    # run_thread.start()
 
 
 def main():
-    global entry, label, config
+    global name_entry, label, config, room_entry
 
     os.chdir(os.environ.get("APP_DIR", "./"))
 
@@ -78,10 +84,16 @@ def main():
 
     status_frame = customtkinter.CTkFrame(app)
     status_frame.grid(row=3, column=0, padx=20, pady=20, sticky="ew")
-    entry = customtkinter.CTkEntry(app, placeholder_text="Username", textvariable=customtkinter.StringVar(value=config["name"]))
-    entry.grid(row=0, column=0, padx=20, pady=20, sticky="new")
+    name_entry = customtkinter.CTkEntry(app, placeholder_text="Username")
+    if len(config["name"]) != 0:
+        name_entry.setvar(config["name"])
+    name_entry.grid(row=0, column=0, padx=20, pady=20, sticky="new")
+    room_entry = customtkinter.CTkEntry(app, placeholder_text="Room Code")
+    if len(config["room_code"]) != 0:
+        room_entry.setvar(config["room_code"])
+    room_entry.grid(row=1, column=0, padx=20, pady=20, sticky="new")
     button = customtkinter.CTkButton(app, text="Start", command=start_callback)
-    button.grid(row=1, column=0, padx=20, pady=20, sticky="ew")
+    button.grid(row=2, column=0, padx=20, pady=20, sticky="ew")
     label = customtkinter.CTkLabel(status_frame, text="")
     label.grid(row=0, column=0, padx=20, pady=20, sticky="ew")
 
