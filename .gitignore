@@ -1,4 +1,4 @@
 config.json
 test.py
-__pycache__
-server/__pycache__
+*__pycache__
+*.DS_STORE
